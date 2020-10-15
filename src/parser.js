@@ -1,6 +1,8 @@
 
 export function ParseData(data, num_pairs) {
-  console.log("num pairs:" + num_pairs)
+  console.log("react num pairs:" + num_pairs)
+  console.log("react data:");
+  console.log(data);
   var org_pairs = data[0].rows;
 
   // rows gives array of array[3], 0: source, 1: dest, 2: value
