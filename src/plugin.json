@@ -1,12 +1,12 @@
 {
   "type": "panel",
-  "name": "Grafana Panel Plugin Template",
-  "id": "myorgid-simple-panel",
+  "name": "Grafana Slope Graph Panel",
+  "id": "react-slope-graph",
 
   "info": {
-    "description": "Grafana Panel Plugin Template",
+    "description": "Grafana Slope Graph Panel",
     "author": {
-      "name": "Your Name"
+      "name": "Katrina Turner"
     },
     "keywords": ["panel", "template"],
     "logos": {
