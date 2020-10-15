@@ -1,0 +1,29 @@
+{
+  "type": "panel",
+  "name": "Grafana Slope Graph Panel",
+  "id": "react-slope-graph",
+
+  "info": {
+    "description": "Grafana Slope Graph Panel",
+    "author": {
+      "name": "Katrina Turner"
+    },
+    "keywords": ["panel", "template"],
+    "logos": {
+      "small": "img/logo.svg",
+      "large": "img/logo.svg"
+    },
+    "links": [
+      {"name": "Website", "url": "https://github.com/grafana/simple-react-panel"},
+      {"name": "License", "url": "https://github.com/grafana/simple-react-panel/blob/master/LICENSE"}
+    ],
+    "screenshots": [],
+    "version": "1.0.0",
+    "updated": "2020-10-15"
+  },
+
+  "dependencies": {
+    "grafanaVersion": "7.0.x",
+    "plugins": []
+  }
+}
