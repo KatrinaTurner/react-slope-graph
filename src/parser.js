@@ -6,7 +6,7 @@ export function ParseData(data, num_pairs) {
 
   // series[0].fields[x].values.buffer gives data now.
   // x = 0: source, 1: dest, 2: value
-  var extractedData = series[0].fields;
+  var extractedData = data.series[0].fields;
   var transformedData = [];
 
   for (i in extractedData[0].values.buffer) {
