@@ -3,12 +3,20 @@ export function ParseData(data, num_pairs) {
   console.log("react num pairs:" + num_pairs)
   console.log("react data:");
   console.log(data);
-  var org_pairs = data[0].rows;
 
-  // rows gives array of array[3], 0: source, 1: dest, 2: value
+  // series[0].fields[x].values.buffer gives data now.
+  // x = 0: source, 1: dest, 2: value
+  var extractedData = series[0].fields;
+  var transformedData = [];
 
+  for (i in extractedData[0].values.buffer) {
+    temp = [extractedData[0].values.buffer[i], extractedData[1].values.buffer[i], extractedData[2].values.buffer[i]]
+    transformedData.push(temp);
+  }
+  console.log("transformed data");
+  console.log(transformedData);
 
-  let sorted_org_pairs = org_pairs.sort((a, b) => b[2] - a[2])
+  let sorted_org_pairs = transformedData.sort((a, b) => b[2] - a[2]);
 
   // top 10 is actually top N, set by editor.  Default is 10.
   let top_10_pairs = sorted_org_pairs.slice(0, Math.min(num_pairs, sorted_org_pairs.length));
