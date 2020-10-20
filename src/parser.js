@@ -10,7 +10,7 @@ export function ParseData(data, num_pairs) {
   var transformedData = [];
 
   for (i in extractedData[0].values.buffer) {
-    temp = [extractedData[0].values.buffer[i], extractedData[1].values.buffer[i], extractedData[2].values.buffer[i]]
+    var temp = [extractedData[0].values.buffer[i], extractedData[1].values.buffer[i], extractedData[2].values.buffer[i]]
     transformedData.push(temp);
   }
   console.log("transformed data");
