@@ -1,6 +1,7 @@
 
 export function ParseData(data, num_pairs) {
   console.log("react num pairs:" + num_pairs)
+  num_pairs = 10;  // REMOVE THIS ONCE VARIABLE WORKS!!!
   console.log("react data:");
   console.log(data);
 
@@ -10,8 +11,8 @@ export function ParseData(data, num_pairs) {
   var transformedData = [];
 
   for (i in extractedData[0].values.buffer) {
-    var temp = [extractedData[0].values.buffer[i], extractedData[1].values.buffer[i], extractedData[2].values.buffer[i]]
-    transformedData.push(temp);
+    var row = [extractedData[0].values.buffer[i], extractedData[1].values.buffer[i], extractedData[2].values.buffer[i]];
+    transformedData.push(row);
   }
   console.log("transformed data");
   console.log(transformedData);
