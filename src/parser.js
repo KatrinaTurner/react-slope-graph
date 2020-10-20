@@ -27,13 +27,13 @@ export function ParseData(data, num_pairs) {
   let source_orgs = [];
   let source_encoding = [];
   let counter = 0;
-  for (i in top_10_pairs) {
+  for (var i in top_10_pairs) {
     let new_org = top_10_pairs[i][0];
     let added = false;
     top_10_pairs[i].coords = [
       { "x": 0, "value": top_10_pairs[i][2] },
       { "x": 1 }]
-    for (j in source_orgs) {
+    for (var j in source_orgs) {
       if (source_orgs[j] == new_org) {
         added = true;
         source_encoding.push(parseInt(j));
@@ -54,10 +54,10 @@ export function ParseData(data, num_pairs) {
   let dest_orgs = [];
   let dest_encoding = [];
   counter = 0;
-  for (i in top_10_pairs) {
+  for (var i in top_10_pairs) {
     let new_org = top_10_pairs[i][1];
     let added = false;
-    for (j in dest_orgs) {
+    for (var j in dest_orgs) {
       if (dest_orgs[j] == new_org) {
         added = true;
         dest_encoding.push(parseInt(j));
@@ -97,7 +97,7 @@ export function ParseData(data, num_pairs) {
 
   console.log("max val: " + max_value);
 
-  for (i in top_10_pairs) {
+  for (var i in top_10_pairs) {
     let color_scale = Math.ceil(top_10_pairs[i][2] / max_value * 10)
     if (color_scale > 0) {
       color_scale--;
