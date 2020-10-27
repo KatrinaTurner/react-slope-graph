@@ -4,7 +4,7 @@ export interface SimpleOptions {
   text: string;
   showSeriesCount: boolean;
   seriesCountSize: SeriesSize;
-  numLine: number;
+  numLines: number;
   leftHeader: string;
   rightHeader: string;
 }
