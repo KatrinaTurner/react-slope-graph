@@ -11,8 +11,10 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) =
 
   console.log(parsedData);
 
-  const header1 = options.leftHeader;
-  const header2 = options.rightHeader;
+  let graph_options = {
+    ...options
+  }
+  console.log(graph_options);
 
   return (
     <div>React Panel</div>
