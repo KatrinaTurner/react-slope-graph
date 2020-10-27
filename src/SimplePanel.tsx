@@ -6,9 +6,13 @@ import { ParseData } from 'parser.js';
 interface Props extends PanelProps<SimpleOptions> {}
 
 export const SimplePanel: React.FC<Props> = ({ options, data, width, height }) => {
-  const parsedData = ParseData(data);
+  const num_pairs = options.numLines;
+  const parsedData = ParseData(data, num_pairs);
 
   console.log(parsedData);
+
+  const header1 = options.leftHeader;
+  const header2 = options.rightHeader;
 
   return (
     <div>React Panel</div>
