@@ -1,7 +1,6 @@
 
 export function ParseData(data, num_pairs) {
   console.log("react num pairs:" + num_pairs)
-  num_pairs = 10;  // REMOVE THIS ONCE VARIABLE WORKS!!!
   console.log("react data:");
   console.log(data);
 
