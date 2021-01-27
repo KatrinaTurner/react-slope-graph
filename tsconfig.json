@@ -6,6 +6,8 @@
     "baseUrl": "./src",
     "typeRoots": ["./node_modules/@types"],
     "noImplicitAny": false,
-    "allowJs": true
-  }
+    "allowJs": true,
+    "outDir": "$$ts-jest$$"
+  },
+  "exclude": ["public", "dist", "node_modules"],
 }
