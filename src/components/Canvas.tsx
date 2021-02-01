@@ -11,7 +11,8 @@ export const Canvas = props => {
     const chart = new SvgHandler('Chart_' + id);
     console.log(chart);
 
-    chart.renderGraph(props.data, null, null, null);
+    // data, ctrl, header1, header2
+    chart.renderGraph(props.data, props.height, props.width, null, null);
 
   });
 

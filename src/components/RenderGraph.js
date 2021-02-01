@@ -6,7 +6,7 @@ export default class SvgHandler {
     this.containerID = id;
   }
 
-  renderGraph(parsedData, ctrl, header1, header2) {
+  renderGraph(parsedData, propsHeight, propsWidth, header1, header2) {
 
     if (!parsedData) {
       return;
@@ -30,7 +30,7 @@ export default class SvgHandler {
     // set the dimensions and margins of the graph
     var margin = { top: 50, right: 400, bottom: 25, left: 400 },
       width = panelWidth - margin.left - margin.right,
-      height = ctrl.height - margin.top - margin.bottom;
+      height = propsHeight - margin.top - margin.bottom;
 
 
 
