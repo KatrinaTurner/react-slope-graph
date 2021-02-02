@@ -126,9 +126,10 @@ export default class SvgHandler {
       .attr("class", "tooltip")
       .style("opacity", 0);
 
+////////// WORKS TILL HERE!!!! /////////////////////
 
     // Add the lines
-    for (i in top_10_pairs) {
+    for (i = 0; i < top_10_pairs.length; i++) {
       var value = top_10_pairs[i][2];
 
       svg.append("path")
