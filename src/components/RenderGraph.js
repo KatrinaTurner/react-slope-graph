@@ -129,19 +129,20 @@ export default class SvgHandler {
 ////////// WORKS TILL HERE!!!! /////////////////////
 
     // Add the lines
-    for (i = 0; i < top_10_pairs.length; i++) {
-      var value = top_10_pairs[i][2];
+    //for (i = 0; i < top_10_pairs.length; i++)
+    top_10_pairs.forEach(function(element) {
+      var value = element[2];
 
       svg.append("path")
-        .datum(top_10_pairs[i].coords)
+        .datum(element.coords)
         .attr("fill", "none")
         .attr("stroke", function (d) { return d[0].color })
         //() => {
-        //     var alpha = 0.7; // w(top_10_pairs[i][2]) / 5;
+        //     var alpha = 0.7; // w(element[2]) / 5;
         //     var color = "rgba(51, 102, 255," + alpha + ")";
         //     return color;
         // })
-        .attr("stroke-width", 8) // w(top_10_pairs[i][2]))
+        .attr("stroke-width", 8) // w(element[2]))
         .attr("d", d3.line()
           .x(function (d) { return x(d.x) })
           .y(function (d) {
@@ -195,7 +196,7 @@ export default class SvgHandler {
             return d[0].color;
           })
         })
-    }
+    })
 
     // Add axis labels
     svg.append("text")
