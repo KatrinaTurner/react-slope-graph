@@ -11,12 +11,15 @@ export default class SvgHandler {
     if (!parsedData) {
       return;
     }
+
+    // SUPER IMPORTANT! This clears old chart before drawing new one...
     d3.select('#' + this.containerID)
       .select('svg')
       .remove();
     d3.select('#' + this.containerID)
       .select('.tooltip')
       .remove();
+    // ----------------------------------------------------------
 
     let top_10_pairs = parsedData.topPairs;
     let source_orgs = parsedData.srcOrgs;
