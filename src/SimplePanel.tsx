@@ -11,6 +11,12 @@ export const SimplePanel: React.FC<Props> = ({ options, data, width, height, id 
     ...options
   }
 
+  // new stuff
+//   let state = {
+//       data: [],
+//       activeName: null
+//   }
+  // ----
   const parsedData = ParseData(data, graph_options.numLines);
 
   console.log(parsedData);

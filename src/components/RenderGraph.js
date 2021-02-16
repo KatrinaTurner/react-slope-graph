@@ -168,30 +168,7 @@ export default class SvgHandler {
             .duration(200)
             .style("opacity", .9);
           div.html(() => {                    // takes in value in BYTES and converts to appropriate MB,GB, etc
-            var value = d[0].value
-            value = value / 1000;
-            var volume = value;
-            if (value < 1000) {
-              volume = (Math.round(value * 10) / 10) + " KB";
-            } else {
-              value = value / 1000;
-              if (value < 1000) {
-                volume = (Math.round(value * 10) / 10) + " MB"
-              } else {
-                value = value / 1000;
-                if (value < 1000) {
-                  volume = (Math.round(value * 10) / 10) + " GB"
-                } else {
-                  value = value / 1000;
-                  if (value < 1000) {
-                    volume = (Math.round(value * 10) / 10) + " TB"
-                  } else {
-                    volume = (Math.round(value * 10) / 10) + " PB"
-                  }
-                }
-              }
-            }
-            var text = "<p><b>Source:</b> " + d[0].source + "</p><p><b>Destination:</b> " + d[0].dest + "</p><p><b>Volume:</b> " + volume;
+            var text = "<p><b>Source:</b> " + d[0].source + "</p><p><b>Destination:</b> " + d[0].dest + "</p><p><b>Volume:</b> " + d[0].displayValue;
             return text;
           })
             .style("left", (d3.event.pageX) + "px")
