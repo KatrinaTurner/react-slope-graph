@@ -1,4 +1,5 @@
 import * as d3 from 'd3';
+//import LineTooltip from 'react-d3-tooltip';
 
 
 export default class SvgHandler {
@@ -167,7 +168,7 @@ export default class SvgHandler {
           div.transition()
             .duration(200)
             .style("opacity", .9);
-          div.html(() => {                    // takes in value in BYTES and converts to appropriate MB,GB, etc
+          div.html(() => {                    
             var text = "<p><b>Source:</b> " + d[0].source + "</p><p><b>Destination:</b> " + d[0].dest + "</p><p><b>Volume:</b> " + d[0].displayValue;
             return text;
           })
@@ -197,23 +198,6 @@ export default class SvgHandler {
       .attr("text-anchor", "center")
       .text(header2);
 
-    // add legend
-
-    // var colorScale = d3.scaleQuantize()
-    //     .domain([min_value,max_value])
-    //     .range(color_palette);
-
-    // var colorLegend = d3.legendColor()
-    //     .labelFormat(d3.format(".0f"))
-    //     .scale(colorScale)
-    //     .shapePadding(3)
-    //     .shapeWidth(50)
-    //     .shapeHeight(20)
-    //     .labelOffset(12);
-
-    // svg.append("g")
-    //     .attr("transform", "translate(" + (width + margin.right / 2) + ", 60)")
-    //     .call(colorLegend);
   }
 
 }
