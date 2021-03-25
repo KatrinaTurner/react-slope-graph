@@ -1,10 +1,9 @@
-export function ParseData(data, num_pairs) {
-  console.log('react num pairs:' + num_pairs);
+export function ParseData(data, numPairs) {
   console.log('react data:');
   console.log(data);
 
   // series[0].fields[x].values.buffer gives data now.
-  // x = 0: source, 1: dest, 2: value
+  // x = 0: left column terms, 1: right column terms, 2: value
   var extractedData = data.series[0].fields;
   var transformedData = [];
 
@@ -15,61 +14,59 @@ export function ParseData(data, num_pairs) {
   console.log('transformed data');
   console.log(transformedData);
 
-  let sorted_org_pairs = transformedData.sort((a, b) => b[2] - a[2]);
+  let sortedPairs = transformedData.sort((a, b) => b[2] - a[2]);
 
-  // top 10 is actually top N, set by editor.  Default is 10.
-  let top_10_pairs = sorted_org_pairs.slice(0, Math.min(num_pairs, sorted_org_pairs.length));
+  // topPairs is set by editor.  Default is 10.
+  let topPairs = sortedPairs.slice(0, Math.min(numPairs, sortedPairs.length));
 
   // MAKE KEYS
-  let source_orgs = [];
-  let source_encoding = [];
+  let leftKeys = [];
+  let leftEncoding = [];
   let counter = 0;
-  for (var i in top_10_pairs) {
-    let new_org = top_10_pairs[i][0];
+  for (var i in topPairs) {
+    let newKey = topPairs[i][0];
     let added = false;
-    top_10_pairs[i].coords = [{ x: 0, value: top_10_pairs[i][2] }, { x: 1 }];
-    for (var j in source_orgs) {
-      if (source_orgs[j] == new_org) {
+    topPairs[i].coords = [{ x: 0, value: topPairs[i][2] }, { x: 1 }];
+    for (var j in leftKeys) {
+      if (leftKeys[j] == newKey) {
         added = true;
-        source_encoding.push(parseInt(j));
-        top_10_pairs[i].coords[0].y = parseInt(j);
+        leftEncoding.push(parseInt(j));
+        topPairs[i].coords[0].y = parseInt(j);
         break;
       }
     }
     if (!added) {
-      source_orgs.push(new_org);
-      source_encoding.push(counter);
-      top_10_pairs[i].coords[0].y = counter;
+      leftKeys.push(newKey);
+      leftEncoding.push(counter);
+      topPairs[i].coords[0].y = counter;
       counter++;
     }
   }
 
-  // dest keys
-
-  let dest_orgs = [];
-  let dest_encoding = [];
+  let rightKeys = [];
+  let rightEncoding = [];
   counter = 0;
-  for (var i in top_10_pairs) {
-    let new_org = top_10_pairs[i][1];
+  for (var i in topPairs) {
+    let newKey = topPairs[i][1];
     let added = false;
-    for (var j in dest_orgs) {
-      if (dest_orgs[j] == new_org) {
+    for (var j in rightKeys) {
+      if (rightKeys[j] == newKey) {
         added = true;
-        dest_encoding.push(parseInt(j));
-        top_10_pairs[i].coords[1].y = parseInt(j);
+        rightEncoding.push(parseInt(j));
+        topPairs[i].coords[1].y = parseInt(j);
         break;
       }
     }
     if (!added) {
-      dest_orgs.push(new_org);
-      dest_encoding.push(counter);
-      top_10_pairs[i].coords[1].y = counter;
+      rightKeys.push(newKey);
+      rightEncoding.push(counter);
+      topPairs[i].coords[1].y = counter;
       counter++;
     }
   }
 
-  // tick marks at source_orgs & dest_orgs,
-  // line y values at source_encoding & dest_encoding
+  // tick marks at leftKeys & rightKeys,
+  // line y values at leftEncoding & rightEncoding
   // line thickness relative to top_values
 
   // set colors by value as well.
@@ -87,23 +84,21 @@ export function ParseData(data, num_pairs) {
     'rgba(3, 12, 158, ' + alpha + ')',
   ];
 
-  let max_value = top_10_pairs[0][2];
+  let max_value = topPairs[0][2];
 
-  console.log('max val: ' + max_value);
-
-  for (var i in top_10_pairs) {
-    let color_scale = Math.ceil((top_10_pairs[i][2] / max_value) * 10);
+  for (var i = 0; i < topPairs.length; i++) {
+    let color_scale = Math.ceil((topPairs[i][2] / max_value) * 10);
     if (color_scale > 0) {
       color_scale--;
     }
-    top_10_pairs[i].coords[0].color = color_palette[color_scale];
+    topPairs[i].coords[0].color = color_palette[color_scale];
 
     // add source/dest to coords
-    top_10_pairs[i].coords[0].source = top_10_pairs[i][0];
-    top_10_pairs[i].coords[0].dest = top_10_pairs[i][1];
+    topPairs[i].coords[0].source = topPairs[i][0];
+    topPairs[i].coords[0].dest = topPairs[i][1];
 
     // add readable value
-    let value = top_10_pairs[i].coords[0].value / 1000;
+    let value = topPairs[i].coords[0].value / 1000;
     var volume = value;
     if (value < 1000) {
       volume = Math.round(value * 10) / 10 + ' KB';
@@ -125,15 +120,15 @@ export function ParseData(data, num_pairs) {
         }
       }
     }
-    top_10_pairs[i].coords[0].displayValue = volume;
+    topPairs[i].coords[0].displayValue = volume;
   }
 
-  console.log(top_10_pairs);
+  console.log(topPairs);
 
   let objToReturn = {
-    srcOrgs: source_orgs,
-    destOrgs: dest_orgs,
-    topPairs: top_10_pairs,
+    srcOrgs: leftKeys,
+    destOrgs: rightKeys,
+    topPairs: topPairs,
   };
 
   return objToReturn;
