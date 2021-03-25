@@ -1,6 +1,6 @@
 type SeriesSize = 'sm' | 'md' | 'lg';
 
-export interface SimpleOptions {
+export interface SlopeGraphOptions {
   text: string;
   showSeriesCount: boolean;
   seriesCountSize: SeriesSize;
