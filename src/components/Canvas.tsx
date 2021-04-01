@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import  SvgHandler from './RenderGraph.js';
+import '../css/styles.css';
 
 // import Chart from 'chart.heatmap.js';
 export const Canvas = props => {
@@ -10,7 +11,7 @@ export const Canvas = props => {
     const chart = new SvgHandler('Chart_' + id);
 
     // data, ctrl, header1, header2
-    chart.renderGraph(props.data, props.height, props.options.leftHeader, props.options.rightHeader);
+    chart.renderGraph(props.data, props.options.leftHeader, props.options.rightHeader, props.options.hoverColor);
 
   });
 

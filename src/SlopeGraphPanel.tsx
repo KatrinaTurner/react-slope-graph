@@ -10,14 +10,7 @@ export const SlopeGraphPanel: React.FC<Props> = ({ options, data, width, height,
   let graph_options = {
     ...options
   }
-
-  // new stuff
-//   let state = {
-//       data: [],
-//       activeName: null
-//   }
-  // ----
-
+  
   var parsedData = {};
   try {
     parsedData = ParseData(data, graph_options.numLines);

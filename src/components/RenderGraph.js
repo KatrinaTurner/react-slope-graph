@@ -7,7 +7,7 @@ export default class SvgHandler {
     this.containerID = id;
   }
 
-  renderGraph(parsedData, propsHeight, header1, header2) {
+  renderGraph(parsedData, header1, header2, hoverColor) {
 
     if (!parsedData) {
       return;
@@ -40,7 +40,7 @@ export default class SvgHandler {
     // set the dimensions and margins of the graph
     var margin = { top: 50, right: 400, bottom: 25, left: 400 },
       width = panelWidth - margin.left - margin.right,
-      height = propsHeight - margin.top - margin.bottom;
+      height = panelHeight - margin.top - margin.bottom;
 
 
 
@@ -162,7 +162,7 @@ export default class SvgHandler {
             }
           }))
         .on("mouseover", function (d) {
-          d3.select(this).attr("stroke", "orange")
+          d3.select(this).attr("stroke", hoverColor)
             .attr("class", "path-hover");
           div.transition()
             .duration(200)

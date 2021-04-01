@@ -1,7 +1,4 @@
-import {
-  FieldConfigProperty,
-  PanelPlugin,
-} from '@grafana/data';
+import { FieldConfigProperty, PanelPlugin } from '@grafana/data';
 import { SlopeGraphOptions } from './types';
 import { SlopeGraphPanel } from './SlopeGraphPanel';
 import { standardOptionsCompat } from 'grafana-plugin-support';
@@ -12,44 +9,48 @@ const buildStandardOptions = (): any => {
 };
 
 export const plugin = new PanelPlugin<SlopeGraphOptions>(SlopeGraphPanel)
-.useFieldConfig({
-  useCustomConfig: (builder) => {
-    builder
-      .addSelect({
-        path: 'colorPalette',
-        name: 'Color palette',
-        settings: {
-          options: colorPalettes,
-        },
-        defaultValue: 'interpolateSpectral',
-      })
-      .addBooleanSwitch({
-        path: 'invertPalette',
-        name: 'Invert color palette',
-        defaultValue: false,
-      });
+  .useFieldConfig({
+    useCustomConfig: builder => {
+      builder
+        .addSelect({
+          path: 'colorPalette',
+          name: 'Color palette',
+          settings: {
+            options: colorPalettes,
+          },
+          defaultValue: 'interpolateSpectral',
+        })
+        .addBooleanSwitch({
+          path: 'invertPalette',
+          name: 'Invert color palette',
+          defaultValue: false,
+        });
     },
-  standardOptions: buildStandardOptions(),
-})
-.setPanelOptions(builder => {
-  return builder
-    .addNumberInput({
-      path: 'numLines',
-      name: 'Number of Lines to Display',
-      defaultValue: 10,
-    })
-    .addTextInput({
-      path: 'leftHeader',
-      name: 'Left Column Header',
-      defaultValue: 'Left Title',
-    })
-    .addTextInput({
-      path: 'rightHeader',
-      name: 'Right Column Header',
-      defaultValue: 'Right Title',
-    });
-});
-
+    standardOptions: buildStandardOptions(),
+  })
+  .setPanelOptions(builder => {
+    return builder
+      .addNumberInput({
+        path: 'numLines',
+        name: 'Number of Lines to Display',
+        defaultValue: 10,
+      })
+      .addTextInput({
+        path: 'leftHeader',
+        name: 'Left Column Header',
+        defaultValue: 'Left Title',
+      })
+      .addTextInput({
+        path: 'rightHeader',
+        name: 'Right Column Header',
+        defaultValue: 'Right Title',
+      })
+      .addColorPicker({
+        path: 'hoverColor',
+        name: 'Hover color',
+        defaultValue: 'red'
+      });
+  });
 
 const colorPalettes = [
   // Diverging
