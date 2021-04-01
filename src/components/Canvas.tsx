@@ -7,12 +7,10 @@ export const Canvas = props => {
   useEffect(() => {
     console.log('rendering');
     const id = props.panelId;
-    // const chartDiv = document.getElementById('Chart_' + id);
     const chart = new SvgHandler('Chart_' + id);
-    console.log(chart);
 
     // data, ctrl, header1, header2
-    chart.renderGraph(props.data, props.height, props.width, props.options.leftHeader, props.options.rightHeader);
+    chart.renderGraph(props.data, props.height, props.options.leftHeader, props.options.rightHeader);
 
   });
 

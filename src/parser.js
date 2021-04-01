@@ -1,14 +1,32 @@
+import { TimeRange, dateTime, dateTimeParse, DisplayProcessor, Field, getDisplayProcessor, display } from '@grafana/data';
+
 export function ParseData(data, numPairs) {
   console.log('react data:');
   console.log(data);
+
+  const valueField = data.series
+    .map(series => series.fields.find(field => field.type === 'number'));
+    // .map(field => field?.values.get(field.values.length - 1));
+
+  let values = [];
+  
+  valueField[0].values.buffer.map(value => {
+        values.push([value, valueField[0].display(value)]);
+      })
+
+  //const valuesBuffer = valueField[0].values.buffer;
+  console.log("values");
+  console.log(values);
+
 
   // series[0].fields[x].values.buffer gives data now.
   // x = 0: left column terms, 1: right column terms, 2: value
   var extractedData = data.series[0].fields;
   var transformedData = [];
 
-  for (var i in extractedData[0].values.buffer) {
-    var row = [extractedData[0].values.buffer[i], extractedData[1].values.buffer[i], extractedData[2].values.buffer[i]];
+  for (var i = 0; i < extractedData[0].values.buffer.length; i++) {
+    
+    var row = [extractedData[0].values.buffer[i], extractedData[1].values.buffer[i], values[i][0], values[i][1] ];
     transformedData.push(row);
   }
   console.log('transformed data');
@@ -26,7 +44,7 @@ export function ParseData(data, numPairs) {
   for (var i in topPairs) {
     let newKey = topPairs[i][0];
     let added = false;
-    topPairs[i].coords = [{ x: 0, value: topPairs[i][2] }, { x: 1 }];
+    topPairs[i].coords = [{ x: 0, value: topPairs[i][2], displayValue: topPairs[i][3] }, { x: 1 }];
     for (var j in leftKeys) {
       if (leftKeys[j] == newKey) {
         added = true;
@@ -93,41 +111,42 @@ export function ParseData(data, numPairs) {
     }
     topPairs[i].coords[0].color = color_palette[color_scale];
 
-    // add source/dest to coords
-    topPairs[i].coords[0].source = topPairs[i][0];
-    topPairs[i].coords[0].dest = topPairs[i][1];
+    // add label0/label1 to coords
+    topPairs[i].coords[0].label0 = topPairs[i][0];
+    topPairs[i].coords[0].label1 = topPairs[i][1];
 
     // add readable value
-    let value = topPairs[i].coords[0].value / 1000;
-    var volume = value;
-    if (value < 1000) {
-      volume = Math.round(value * 10) / 10 + ' KB';
-    } else {
-      value = value / 1000;
-      if (value < 1000) {
-        volume = Math.round(value * 10) / 10 + ' MB';
-      } else {
-        value = value / 1000;
-        if (value < 1000) {
-          volume = Math.round(value * 10) / 10 + ' GB';
-        } else {
-          value = value / 1000;
-          if (value < 1000) {
-            volume = Math.round(value * 10) / 10 + ' TB';
-          } else {
-            volume = Math.round(value * 10) / 10 + ' PB';
-          }
-        }
-      }
-    }
-    topPairs[i].coords[0].displayValue = volume;
+    let value = topPairs[i].coords[0].value; // / 1000;
+    
+
+    // var volume = value;
+    // if (value < 1000) {
+    //   volume = Math.round(value * 10) / 10 + ' KB';
+    // } else {
+    //   value = value / 1000;
+    //   if (value < 1000) {
+    //     volume = Math.round(value * 10) / 10 + ' MB';
+    //   } else {
+    //     value = value / 1000;
+    //     if (value < 1000) {
+    //       volume = Math.round(value * 10) / 10 + ' GB';
+    //     } else {
+    //       value = value / 1000;
+    //       if (value < 1000) {
+    //         volume = Math.round(value * 10) / 10 + ' TB';
+    //       } else {
+    //         volume = Math.round(value * 10) / 10 + ' PB';
+    //       }
+    //     }
+    //   }
+    // }
   }
 
   console.log(topPairs);
 
   let objToReturn = {
-    srcOrgs: leftKeys,
-    destOrgs: rightKeys,
+    leftKeys: leftKeys,
+    rightKeys: rightKeys,
     topPairs: topPairs,
   };
 

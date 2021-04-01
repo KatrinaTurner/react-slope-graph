@@ -7,7 +7,7 @@ export default class SvgHandler {
     this.containerID = id;
   }
 
-  renderGraph(parsedData, propsHeight, propsWidth, header1, header2) {
+  renderGraph(parsedData, propsHeight, header1, header2) {
 
     if (!parsedData) {
       return;
@@ -22,21 +22,21 @@ export default class SvgHandler {
       .remove();
     // ----------------------------------------------------------
 
-    let top_10_pairs = parsedData.topPairs;
-    let source_orgs = parsedData.srcOrgs;
-    let dest_orgs = parsedData.destOrgs;
+    let topPairs = parsedData.topPairs;
+    let leftKeys = parsedData.leftKeys;
+    let rightKeys = parsedData.rightKeys;
     let alpha = parsedData.alpha;
     let color_palette = parsedData.color_palette;
 
-    let min_value = top_10_pairs[top_10_pairs.length - 1][2]
-    let max_value = top_10_pairs[0][2]
+    let min_value = topPairs[topPairs.length - 1][2]
+    let max_value = topPairs[0][2]
 
     console.log("rendering Graph...");
 
     let panelWidth = document.getElementById(this.containerID).offsetWidth;
     let panelHeight = document.getElementById(this.containerID).offsetHeight;
 
-    console.log(this.containerID, top_10_pairs);
+    console.log(this.containerID, topPairs);
     // set the dimensions and margins of the graph
     var margin = { top: 50, right: 400, bottom: 25, left: 400 },
       width = panelWidth - margin.left - margin.right,
@@ -87,27 +87,27 @@ export default class SvgHandler {
 
     // y scales
     var yl = d3.scaleLinear()
-      .domain([0, source_orgs.length - 1])
+      .domain([0, leftKeys.length - 1])
       .range([0, height])
 
     var yr = d3.scaleLinear()
-      .domain([0, dest_orgs.length - 1])
+      .domain([0, rightKeys.length - 1])
       .range([0, height])
 
 
     // Add Y axes
     var leftAxis = d3.axisLeft(yl)
       .tickSize(5)
-      .ticks(source_orgs.length)
+      .ticks(leftKeys.length)
       .tickFormat((d) => {
-        return source_orgs[d]
+        return leftKeys[d]
       })
 
     var rightAxis = d3.axisRight(yr)
       .tickSize(5)
-      .ticks(dest_orgs.length)
+      .ticks(rightKeys.length)
       .tickFormat((d) => {
-        return dest_orgs[d]
+        return rightKeys[d]
       })
 
     svg.append("g").call(leftAxis)
@@ -129,18 +129,17 @@ export default class SvgHandler {
 
     // scale for width of lines
     var w = d3.scaleLinear()
-      .domain([top_10_pairs[top_10_pairs.length - 1][2], top_10_pairs[0][2]])
+      .domain([topPairs[topPairs.length - 1][2], topPairs[0][2]])
       .range([3, 15])
 
     var div = d3.select("body").append("div")
       .attr("class", "tooltip")
       .style("opacity", 0);
 
-////////// WORKS TILL HERE!!!! /////////////////////
 
     // Add the lines
-    //for (i = 0; i < top_10_pairs.length; i++)
-    top_10_pairs.forEach(function(element) {
+    //for (i = 0; i < topPairs.length; i++)
+    topPairs.forEach(function(element) {
       var value = element[2];
 
       svg.append("path")
@@ -169,7 +168,7 @@ export default class SvgHandler {
             .duration(200)
             .style("opacity", .9);
           div.html(() => {                    
-            var text = "<p><b>Source:</b> " + d[0].source + "</p><p><b>Destination:</b> " + d[0].dest + "</p><p><b>Volume:</b> " + d[0].displayValue;
+            var text = "<p><b>"+ header1 +": </b> " + d[0].label0 + "</p><p><b>"+ header2 +": </b> " + d[0].label1 + "</p><p>" + d[0].displayValue.text + (d[0].displayValue.suffix ? d[0].displayValue.suffix : "");
             return text;
           })
             .style("left", (d3.event.pageX) + "px")
