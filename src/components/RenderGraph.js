@@ -26,17 +26,16 @@ export default class SvgHandler {
     let leftKeys = parsedData.leftKeys;
     let rightKeys = parsedData.rightKeys;
     let alpha = parsedData.alpha;
-    let color_palette = parsedData.color_palette;
+    let colorPalette = parsedData.colorPalette;
 
-    let min_value = topPairs[topPairs.length - 1][2]
-    let max_value = topPairs[0][2]
+    //let min_value = topPairs[topPairs.length - 1][2]
+    //let max_value = topPairs[0][2]
 
     console.log("rendering Graph...");
 
     let panelWidth = document.getElementById(this.containerID).offsetWidth;
     let panelHeight = document.getElementById(this.containerID).offsetHeight;
 
-    console.log(this.containerID, topPairs);
     // set the dimensions and margins of the graph
     var margin = { top: 50, right: 400, bottom: 25, left: 400 },
       width = panelWidth - margin.left - margin.right,
@@ -138,7 +137,6 @@ export default class SvgHandler {
 
 
     // Add the lines
-    //for (i = 0; i < topPairs.length; i++)
     topPairs.forEach(function(element) {
       var value = element[2];
 

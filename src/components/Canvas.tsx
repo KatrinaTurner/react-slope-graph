@@ -6,7 +6,6 @@ import '../css/styles.css';
 export const Canvas = props => {
 
   useEffect(() => {
-    console.log('rendering');
     const id = props.panelId;
     const chart = new SvgHandler('Chart_' + id);
 

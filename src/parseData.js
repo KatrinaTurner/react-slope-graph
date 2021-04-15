@@ -1,12 +1,9 @@
 import { TimeRange, dateTime, dateTimeParse, DisplayProcessor, Field, getDisplayProcessor, display } from '@grafana/data';
 
-export function ParseData(data, numPairs) {
-  console.log('react data:');
-  console.log(data);
+export function parseData(data, numPairs) {
 
   const valueField = data.series
     .map(series => series.fields.find(field => field.type === 'number'));
-    // .map(field => field?.values.get(field.values.length - 1));
 
   let values = [];
   
@@ -14,12 +11,7 @@ export function ParseData(data, numPairs) {
         values.push([value, valueField[0].display(value)]);
       })
 
-  //const valuesBuffer = valueField[0].values.buffer;
-  console.log("values");
-  console.log(values);
-
-
-  // series[0].fields[x].values.buffer gives data now.
+  // series[0].fields[x].values.buffer gives data
   // x = 0: left column terms, 1: right column terms, 2: value
   var extractedData = data.series[0].fields;
   var transformedData = [];
@@ -29,8 +21,6 @@ export function ParseData(data, numPairs) {
     var row = [extractedData[0].values.buffer[i], extractedData[1].values.buffer[i], values[i][0], values[i][1] ];
     transformedData.push(row);
   }
-  console.log('transformed data');
-  console.log(transformedData);
 
   let sortedPairs = transformedData.sort((a, b) => b[2] - a[2]);
 
@@ -85,11 +75,11 @@ export function ParseData(data, numPairs) {
 
   // tick marks at leftKeys & rightKeys,
   // line y values at leftEncoding & rightEncoding
-  // line thickness relative to top_values
+  // line thickness relative to top values
 
   // set colors by value as well.
   let alpha = 0.6;
-  let color_palette = [
+  let colorPalette = [
     'rgba(196, 199, 254, ' + alpha + ')',
     'rgba(171, 176, 253, ' + alpha + ')',
     'rgba(146, 152, 248, ' + alpha + ')',
@@ -102,47 +92,23 @@ export function ParseData(data, numPairs) {
     'rgba(3, 12, 158, ' + alpha + ')',
   ];
 
-  let max_value = topPairs[0][2];
+  let maxValue = topPairs[0][2];
 
   for (var i = 0; i < topPairs.length; i++) {
-    let color_scale = Math.ceil((topPairs[i][2] / max_value) * 10);
-    if (color_scale > 0) {
-      color_scale--;
+    let colorScale = Math.ceil((topPairs[i][2] / maxValue) * 10);
+    if (colorScale > 0) {
+      colorScale--;
     }
-    topPairs[i].coords[0].color = color_palette[color_scale];
+    topPairs[i].coords[0].color = colorPalette[colorScale];
 
     // add label0/label1 to coords
     topPairs[i].coords[0].label0 = topPairs[i][0];
     topPairs[i].coords[0].label1 = topPairs[i][1];
 
-    // add readable value
+    // add value
     let value = topPairs[i].coords[0].value; // / 1000;
     
-
-    // var volume = value;
-    // if (value < 1000) {
-    //   volume = Math.round(value * 10) / 10 + ' KB';
-    // } else {
-    //   value = value / 1000;
-    //   if (value < 1000) {
-    //     volume = Math.round(value * 10) / 10 + ' MB';
-    //   } else {
-    //     value = value / 1000;
-    //     if (value < 1000) {
-    //       volume = Math.round(value * 10) / 10 + ' GB';
-    //     } else {
-    //       value = value / 1000;
-    //       if (value < 1000) {
-    //         volume = Math.round(value * 10) / 10 + ' TB';
-    //       } else {
-    //         volume = Math.round(value * 10) / 10 + ' PB';
-    //       }
-    //     }
-    //   }
-    // }
   }
-
-  console.log(topPairs);
 
   let objToReturn = {
     leftKeys: leftKeys,

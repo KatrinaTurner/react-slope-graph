@@ -1,26 +1,24 @@
 import React from 'react';
 import { PanelProps } from '@grafana/data';
 import { SlopeGraphOptions } from 'types';
-import { ParseData } from 'parser.js';
+import { parseData } from 'parseData.js';
 import { Canvas } from 'components/Canvas';
 
 interface Props extends PanelProps<SlopeGraphOptions> {}
 
 export const SlopeGraphPanel: React.FC<Props> = ({ options, data, width, height, id }) => {
-  let graph_options = {
+  let graphOptions = {
     ...options
   }
   
   var parsedData = {};
   try {
-    parsedData = ParseData(data, graph_options.numLines);
+    parsedData = parseData(data, graphOptions.numLines);
 
-    console.log(parsedData);
-    console.log(graph_options);
   } catch (error) {
       console.error("Parsing error : ", error);
   }
  
-  return <Canvas height={height} width={width} panelId={id} options={graph_options} data={parsedData} />;
+  return <Canvas height={height} width={width} panelId={id} options={graphOptions} data={parsedData} />;
 
 };

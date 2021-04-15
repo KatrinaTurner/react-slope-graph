@@ -32,17 +32,17 @@ export const plugin = new PanelPlugin<SlopeGraphOptions>(SlopeGraphPanel)
     return builder
       .addNumberInput({
         path: 'numLines',
-        name: 'Number of Lines to Display',
+        name: 'Number of lines to display',
         defaultValue: 10,
       })
       .addTextInput({
         path: 'leftHeader',
-        name: 'Left Column Header',
+        name: 'Left column header',
         defaultValue: 'Left Title',
       })
       .addTextInput({
         path: 'rightHeader',
-        name: 'Right Column Header',
+        name: 'Right column header',
         defaultValue: 'Right Title',
       })
       .addColorPicker({
