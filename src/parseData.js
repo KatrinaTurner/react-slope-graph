@@ -1,18 +1,24 @@
 import { TimeRange, dateTime, dateTimeParse, DisplayProcessor, Field, getDisplayProcessor, display } from '@grafana/data';
 
+/**
+ * 
+ * @param data - the data returned from Grafana panel query
+ * @param numPairs - the number of lines to display, this is set in the options tab
+ * @returns parsed data for RenderGraph.js to use to render slope graph
+ */
+
 export function parseData(data, numPairs) {
 
+  // Find the number field and use for values. 
   const valueField = data.series
     .map(series => series.fields.find(field => field.type === 'number'));
-
   let values = [];
-  
   valueField[0].values.buffer.map(value => {
         values.push([value, valueField[0].display(value)]);
       })
 
   // series[0].fields[x].values.buffer gives data
-  // x = 0: left column terms, 1: right column terms, 2: value
+  // x = 0: left column terms, 1: right column terms
   var extractedData = data.series[0].fields;
   var transformedData = [];
 
