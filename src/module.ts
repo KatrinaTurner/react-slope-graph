@@ -10,22 +10,6 @@ const buildStandardOptions = (): any => {
 
 export const plugin = new PanelPlugin<SlopeGraphOptions>(SlopeGraphPanel)
   .useFieldConfig({
-    useCustomConfig: builder => {
-      builder
-        .addSelect({
-          path: 'colorPalette',
-          name: 'Color palette',
-          settings: {
-            options: colorPalettes,
-          },
-          defaultValue: 'interpolateSpectral',
-        })
-        .addBooleanSwitch({
-          path: 'invertPalette',
-          name: 'Invert color palette',
-          defaultValue: false,
-        });
-    },
     standardOptions: buildStandardOptions(),
   })
   .setPanelOptions(builder => {
@@ -46,6 +30,24 @@ export const plugin = new PanelPlugin<SlopeGraphOptions>(SlopeGraphPanel)
         defaultValue: 'Right Title',
       })
       .addColorPicker({
+        path: 'headerColor',
+        name: 'Header color',
+        defaultValue: 'black'
+      })
+      .addSelect({
+          path: 'colorPalette',
+          name: 'Color palette',
+          settings: {
+            options: colorPalettes,
+          },
+          defaultValue: 'interpolateBlues'
+        })
+      .addBooleanSwitch({
+        path: 'invertColorPalette',
+        name: 'Invert color palette',
+        defaultValue: false
+      })
+      .addColorPicker({
         path: 'hoverColor',
         name: 'Hover color',
         defaultValue: 'red'
@@ -53,11 +55,6 @@ export const plugin = new PanelPlugin<SlopeGraphOptions>(SlopeGraphPanel)
   });
 
 const colorPalettes = [
-  // Diverging
-  { label: 'Spectral', value: 'interpolateSpectral' },
-  { label: 'RdYlGn', value: 'interpolateRdYlGn' },
-
-  // Sequential
   { label: 'Blues', value: 'interpolateBlues' },
   { label: 'Greens', value: 'interpolateGreens' },
   { label: 'Greys', value: 'interpolateGreys' },

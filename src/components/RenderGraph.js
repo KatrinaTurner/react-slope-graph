@@ -13,7 +13,7 @@ export default class SlopeGraph {
    * @param hoverColor - the color the lines will change to when hovering, set in options panel
    */
 
-  renderGraph(parsedData, header1, header2, hoverColor) {
+  renderGraph(parsedData, header1, header2, headerColor, hoverColor) {
     if (!parsedData) {
       return;
     }
@@ -31,7 +31,6 @@ export default class SlopeGraph {
     let leftKeys = parsedData.leftKeys;
     let rightKeys = parsedData.rightKeys;
     let alpha = parsedData.alpha;
-    let colorPalette = parsedData.colorPalette;
 
     //let min_value = topPairs[topPairs.length - 1][2]
     //let max_value = topPairs[0][2]
@@ -166,7 +165,7 @@ export default class SlopeGraph {
         .datum(element.coords)
         .attr('fill', 'none')
         .attr('stroke', function(d) {
-          return d[0].color;
+          return d[0].meta.color;
         })
         //() => {
         //     var alpha = 0.7; // w(element[2]) / 5;
@@ -203,14 +202,14 @@ export default class SlopeGraph {
                 '<p><b>' +
                 header1 +
                 ': </b> ' +
-                d[0].label0 +
+                d[0].meta.label0 +
                 '</p><p><b>' +
                 header2 +
                 ': </b> ' +
-                d[0].label1 +
+                d[0].meta.label1 +
                 '</p><p>' +
-                d[0].displayValue.text +
-                (d[0].displayValue.suffix ? d[0].displayValue.suffix : '');
+                d[0].meta.displayValue.text +
+                (d[0].meta.displayValue.suffix ? d[0].meta.displayValue.suffix : '');
               return text;
             })
             .style('left', d3.event.pageX + 'px')
@@ -222,7 +221,7 @@ export default class SlopeGraph {
             .duration(500)
             .style('opacity', 0);
           d3.select(this).attr('stroke', () => {
-            return d[0].color;
+            return d[0].meta.color;
           });
         });
     });
@@ -233,13 +232,15 @@ export default class SlopeGraph {
       .attr('class', 'header-text')
       .attr('transform', 'translate(' + -(margin.left / 2) + ',' + -(margin.top / 2) + ')') // above left axis
       .attr('text-anchor', 'center')
-      .text(header1);
+      .text(header1)
+      .attr('fill', headerColor);
 
     svg
       .append('text')
       .attr('class', 'header-text')
       .attr('transform', 'translate(' + (width + margin.right / 5) + ',' + -(margin.top / 2) + ')') // above right axis
       .attr('text-anchor', 'center')
-      .text(header2);
+      .text(header2)
+      .attr('fill', headerColor);
   }
 }
