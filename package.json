@@ -1,5 +1,5 @@
 {
-  "name": "react-slope-graph-panel",
+  "name": "netsage-slope-graph-panel",
   "version": "1.0.0",
   "description": "Grafana Slope Graph Panel",
   "scripts": {
@@ -8,12 +8,12 @@
     "dev": "grafana-toolkit plugin:dev",
     "watch": "grafana-toolkit plugin:dev --watch"
   },
-  "repository": "github:grafana/simple-react-panel",
-  "author": "Grafana Labs <team@grafana.com> (https://grafana.com)",
+  "repository": "github:netsage-project/react-slope-graph",
+  "author": "Katrina Turner <khj@hawaii.edu> (https://katrinaturner.github.io)",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/grafana/simple-react-panel/issues",
-    "email": "plugins@grafana.com"
+    "url": "https://github.com/netsage-project/react-slope-graph/issues",
+    "email": "khj@hawaii.edu"
   },
   "devDependencies": {
     "@grafana/data": "^7.0.0",
