@@ -8,34 +8,27 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/1dee2585eb412f913cbb/maintainability)](https://codeclimate.com/github/grafana/simple-react-panel/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/1dee2585eb412f913cbb/test_coverage)](https://codeclimate.com/github/grafana/simple-react-panel/test_coverage) -->
 
-This template is a starting point for building Grafana Panel Plugins in Grafana 7.0+
+This plugin was built off a template for building React Grafana Panel Plugins.
 
+## What is the Slope Graph Plugin?
+Slope Graphs are good to use for comparing the change in a single data set between two points in time or the relationship between two data sets.  This plugin takes in data that is grouped by two parameters and sorts the pairs by the value.  It will display the pairs with highest values and draw lines to show the pairs.  The line colors are scaled by the values.
 
-## What is Grafana Panel Plugin?
-Panels are the building blocks of Grafana. They allow you to visualize data in different ways. While Grafana has several types of panels already built-in, you can also build your own panel, to add support for other visualizations.
-
-For more information about panels, refer to the documentation on [Panels](https://grafana.com/docs/grafana/latest/features/panels/panels/)
-
-## Getting started
+## To use
 1. Install dependencies
 ```BASH
 yarn install
 ```
-2. Build plugin in development mode or run in watch mode
-```BASH
-yarn dev
-```
-or
-```BASH
-yarn watch
-```
-3. Build plugin in production mode
+2. Build plugin in production mode
 ```BASH
 yarn build
 ```
 
-## Learn more
-- [Build a panel plugin tutorial](https://grafana.com/tutorials/build-a-panel-plugin)
-- [Grafana documentation](https://grafana.com/docs/)
-- [Grafana Tutorials](https://grafana.com/tutorials/) - Grafana Tutorials are step-by-step guides that help you make the most of Grafana
-- [Grafana UI Library](https://developers.grafana.com/ui) - UI components to help you build interfaces using Grafana Design System
+## Options
+- Number of lines to display:  Data will be sorted by the value and the top N lines will be drawn, as specified here. This number MUST be less than the number of pairs returned by the query
+- Left Header: The text to display above the left column and in the tooltip.
+- Right Header: The text to display above the right column and in the tooltip.
+- Header color: The color of the left and right header
+- Color palette: The color palette of the drawn lines
+- Invert color palette: This inverts the chosen color spectrum
+- Hover color: The color to highlight the line when hovering over it.
+
