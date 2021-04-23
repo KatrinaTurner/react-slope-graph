@@ -1,7 +1,7 @@
 {
   "type": "panel",
   "name": "Grafana Slope Graph Panel",
-  "id": "react-slope-graph",
+  "id": "netsage-slope-graph-panel",
 
   "info": {
     "description": "Grafana Slope Graph Panel",
@@ -14,12 +14,12 @@
       "large": "img/logo.svg"
     },
     "links": [
-      {"name": "Website", "url": "https://github.com/grafana/simple-react-panel"},
-      {"name": "License", "url": "https://github.com/grafana/simple-react-panel/blob/master/LICENSE"}
+      {"name": "Website", "url": "https://github.com/netsage-project/react-slope-graph"},
+      {"name": "License", "url": "https://github.com/netsage-project/react-slope-graph/master/LICENSE"}
     ],
     "screenshots": [],
-    "version": "%VERSION%",
-    "updated": "%TODAY%"
+    "version": "0.0.1",
+    "updated": "April 22, 2021"
   },
 
   "dependencies": {
