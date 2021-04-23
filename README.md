@@ -1,5 +1,5 @@
 # Grafana Slope Graph Panel
-## What a Slope Graph?
+## What is a Slope Graph?
 Slope Graphs are good to use for comparing the change in a single data set between two points in time or the relationship between two data sets.  This plugin is for the latter, showing the relationship between two data sets.
 
 ## Query
