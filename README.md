@@ -2,18 +2,6 @@
 ## What a Slope Graph?
 Slope Graphs are good to use for comparing the change in a single data set between two points in time or the relationship between two data sets.  This plugin is for the latter, showing the relationship between two data sets.
 
-## To use
-1. Download or fork this repo into your plugins folder
-
-2. Install dependencies
-```BASH
-yarn install
-```
-3. Build plugin in production mode
-```BASH
-yarn build
-```
-
 ## Query
 This plugin takes in data that is grouped by two parameters and sorts the pairs by the value.  It will display the pairs with highest values and draw lines to show the pairs.  The line colors are scaled by the values.
 The Query should return two sets of labels for the two y-axis and a number field to sort the pairs by.
