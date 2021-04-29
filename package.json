@@ -16,13 +16,13 @@
     "email": "khj@hawaii.edu"
   },
   "devDependencies": {
-    "@grafana/data": "^7.0.0",
-    "@grafana/toolkit": "^7.0.0",
-    "@grafana/ui": "^7.0.0",
+    "@grafana/data": "latest",
+    "@grafana/toolkit": "latest",
+    "@grafana/ui": "latest",
     "emotion": "10.0.27"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "dependencies": {
     "d3": "^6.5.0",
